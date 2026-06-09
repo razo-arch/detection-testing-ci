@@ -1,0 +1,33 @@
+title: XMRig Coin Miner Deployment via Web Command Execution
+id: c4a7e9d1-5f02-4b38-8e6c-1a9d3f7b2c05
+status: experimental
+description: >
+  Detects indicators of XMRig cryptocurrency miner deployment seen in the
+  post-exploitation phase of the React2Shell incident: downloading the XMRig
+  release, the disguised process name (systemd-logind run from a temp path),
+  the mining pool connection string, and the @reboot cron persistence. Intended
+  for web command-execution logs where the command appears in the request URI.
+references:
+  - https://www.microsoft.com/en-us/security/blog/2025/12/15/defending-against-the-cve-2025-55182-react2shell-vulnerability-in-react-server-components/
+author: Razi Ud Din
+date: 2026-06-09
+logsource:
+  category: webserver
+detection:
+  selection_miner:
+    c-uri|contains:
+      - 'xmrig'
+      - 'systemd-logind'        # disguised binary name run from /var/tmp
+      - '%40reboot'             # @reboot cron persistence
+      - 'config.json'
+  condition: selection_miner
+falsepositives:
+  - >
+    Legitimate references to a real systemd-logind service would not normally
+    appear inside a web request URI. Validate the surrounding command context.
+level: critical
+tags:
+  - attack.impact
+  - attack.t1496
+  - attack.persistence
+  - attack.t1053.003

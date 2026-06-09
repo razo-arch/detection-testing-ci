@@ -1,0 +1,51 @@
+title: OS Command Injection via Web Parameter (Encoded Shell Payload)
+id: 5b1e0a2c-7a3d-4f29-9c14-7c2f1a9d0e11
+status: experimental
+description: >
+  Detects web requests whose URI carries URL-encoded shell metacharacters
+  (pipe, &&, semicolon, backtick, 2>&1) or common reconnaissance and download
+  commands. This pattern is indicative of OS command injection executed through
+  a vulnerable parameter, such as a webshell of the form /<path>?z=<command>.
+  Modelled on the React2Shell (CVE-2025-55182) follow-on activity where the
+  actor used a GET-based command shell to deploy a coin miner.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2025-55182
+author: Razi Ud Din
+date: 2026-06-09
+logsource:
+  category: webserver
+detection:
+  # Angle 1: the command-execution parameter used by the observed webshell.
+  # In this environment the 'z' parameter carries the shell command, so any
+  # request using it is the shell being invoked (catches even bare 'z=id').
+  selection_shellparam:
+    c-uri|re: '[?&]z='
+  # Angle 2: generic encoded shell metacharacters in ANY parameter, so the
+  # rule generalises to command injection beyond this specific shell.
+  selection_shellchars:
+    c-uri|contains:
+      - '%7C'        # | (pipe)
+      - '%26%26'     # && (command chaining)
+      - '%3B'        # ; (command separator)
+      - '%60'        # ` (backtick)
+      - '2%3E%261'   # 2>&1 (stderr redirect, used to return output)
+  selection_cmds:
+    c-uri|contains:
+      - 'wget%20'
+      - 'curl%20'
+      - '/etc/passwd'
+      - 'whoami'
+      - 'nohup%20'
+      - 'crontab'
+      - 'chmod%20'
+      - 'systemctl%20'
+  condition: selection_shellparam or selection_shellchars or selection_cmds
+falsepositives:
+  - >
+    Legitimate query strings very rarely contain encoded shell operators.
+    Note this rule deliberately does NOT match on a bare encoded space (%20)
+    so that benign URLs such as /logo%202.png do not trigger it.
+level: high
+tags:
+  - attack.execution
+  - attack.t1059

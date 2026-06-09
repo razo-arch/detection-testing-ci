@@ -1,0 +1,39 @@
+name: Detection Tests
+
+# Gate every change to detection rules on positive/negative logic tests.
+# A rule cannot merge (and therefore cannot deploy via the DaC pipeline)
+# unless it matches all known-malicious samples and no benign samples.
+
+on:
+  push:
+    paths:
+      - 'rules/**'
+      - 'tests/**'
+      - 'runner/**'
+      - 'test_detections.py'
+  pull_request:
+    paths:
+      - 'rules/**'
+      - 'tests/**'
+      - 'runner/**'
+      - 'test_detections.py'
+
+jobs:
+  detection-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run detection logic tests (summary)
+        run: python runner/sigma_test.py --rules rules --tests tests
+
+      - name: Run detection tests (pytest, per-case)
+        run: pytest -v

