@@ -39,7 +39,7 @@ detection:
       - 'crontab'
       - 'chmod%20'
       - 'systemctl%20'
-  condition: selection_shellparam or selection_shellchars or selection_cmds
+  condition: selection_shellchars or selection_cmds
 falsepositives:
   - >
     Legitimate query strings very rarely contain encoded shell operators.
